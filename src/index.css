@@ -110,6 +110,7 @@ button::-moz-focus-inner {
 }
 
 .ico-login {
+  top: 1rem;
   background: url("/images/user-shape.svg") center no-repeat;
   background-size: contain;
 }
