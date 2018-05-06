@@ -1,4 +1,4 @@
-import { fork } from 'redux-saga/effects';
+import { } from 'redux-saga/effects';
 
 
 export default function*() {
