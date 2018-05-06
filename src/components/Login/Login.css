@@ -1,0 +1,22 @@
+.login {
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+}
+
+.form-field {
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1em;
+    box-sizing: border-box;
+    font-family: 'Merriweather', sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.form-field:focus {
+    box-shadow: 0 1px 1px rgba(62, 31, 31, 0.4);
+ }
