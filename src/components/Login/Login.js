@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { authorize } from "../../actions/auth";
+
+import { authLogRequest, authRegRequest } from "../../actions/auth";
+import { getLogError, getRegError } from "../../ducks/auth";
 
 import Particles from "react-particles-js";
 import particlesParams from "./particles-params";
@@ -54,7 +56,9 @@ class Login extends PureComponent {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
+		// this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
+		const { isAuthorized, email, password } = this.state;
+		isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
 	};
 
  	render() {
@@ -97,16 +101,20 @@ class Login extends PureComponent {
 							</button>
 						</div>
 					</form>
-
-
 				</div>
 			</div>
 		)
 	}
 }
 
+const mapStateToProps = state => ({
+	logError: getLogError(state),
+	regError: getRegError(state)
+});
+
 const mapDispatchToProps = {
-	authorize
+	authLogRequest,
+	authRegRequest,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

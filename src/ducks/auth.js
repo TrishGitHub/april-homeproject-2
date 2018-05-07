@@ -1,19 +1,46 @@
 import { handleActions } from "redux-actions";
-import { authorize, logout } from "../actions/auth";
+import { combineReducers } from "redux";
+import {
+	authLogSuccess,
+	authLogFailure,
+	authRegSuccess,
+	authRegFailure,
+	logout
+} from "../actions/auth";
 
-export default handleActions(
+export const logError = handleActions(
 	{
-		[authorize]: (state, action) => ({
-			...state,
-			isAutorized: true,
-		}),
-
-		[logout]: (state, action) => ({
-			...state,
-			isAutorized: false,
-		})
+		[authLogSuccess]: () => null,
+		[authRegSuccess]: () => null,
+		[authLogFailure]: (state, action) => action.payload
 	},
-	{ isAutorized: false }
+	null
 );
 
-export const getIsAuthorized = state => state.auth.isAutorized;
+export const regError = handleActions(
+	{
+		[authLogSuccess]: () => null,
+		[authRegSuccess]: () => null,
+		[authRegFailure]: (state, action) => action.payload
+	},
+	null
+);
+
+export const isAuthorized = handleActions(
+	{
+		[authLogSuccess]: () => true,
+		[authRegSuccess]: () => true,
+		[logout]: () => false
+	},
+	false
+);
+
+export default combineReducers({
+	logError,
+	regError,
+	isAuthorized,
+});
+
+export const getIsAuthorized = state => state.auth.isAuthorized;
+export const getLogError = state => state.auth.logError;
+export const getRegError = state => state.auth.regError;

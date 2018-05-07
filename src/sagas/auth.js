@@ -1,6 +1,6 @@
-import { setTokenApi, clearTokenApi } from "../api";
-import { authorize, logout } from "../actions/auth";
 import { select, call, put, take } from "redux-saga/effects";
+import { setTokenApi, clearTokenApi } from "../api";
+import { authLogSuccess, authRegSuccess, logout } from "../actions/auth";
 import { getIsAuthorized } from "../ducks/auth";
 import { getTokenFromLocalStorage, setTokenToLocalStorage, removeTokenFromLocalStorage } from "../localStorage";
 
@@ -12,9 +12,9 @@ export function* authFlow() {
 
 		if (!isAuthorized && localStorageToken) {
 			token = localStorageToken;
-			yield put(authorize());
+			yield put(authLogSuccess());
 		} else {
-			const action = yield take(authorize);
+			const action = yield take([authLogSuccess, authRegSuccess]);
 			token = action.payload;
 		}
 		yield call(setTokenApi, token);
