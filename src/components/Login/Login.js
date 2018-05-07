@@ -1,23 +1,64 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { authorize } from "../../actions/auth";
 
 import Particles from "react-particles-js";
 import particlesParams from "./particles-params";
 
 import './Login.css';
 
-class Login extends Component {
+class Login extends PureComponent {
 	state = {
+		email: '',
+		password: '',
+		errors: { email: '', password: '' },
 		isAuthorized: false,
+		isEmailValid: false,
+		isPassValid: false,
 	};
 
-	handleSubmit =(e)=> {
+	handleChangeField = (e) => {
+		let name = e.target.name;
+		let value = e.target.value;
+
+		this.setState({ [name]: value }, () => {
+			this.validateField(name, value);
+		});
+	};
+
+	validateField(field, val) {
+		let errors = this.state.errors;
+		let isEmailValid = this.state.isEmailValid;
+		let isPassValid = this.state.isPassValid;
+
+		switch (field) {
+			case 'email':
+				isEmailValid = val.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+				errors.email = isEmailValid ? '' : ' is invalid';
+				break;
+
+			case 'password':
+				isPassValid = val.length >= 4;
+				errors.password = isPassValid ? '' : ' must be at least 4 characters long';
+				break;
+
+			default:
+		}
+
+		this.setState({
+			errors: errors,
+			isEmailValid: isEmailValid,
+			isPassValid: isPassValid,
+		});
+	};
+
+	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
 	};
 
  	render() {
-	    const { isAuthorized } = this.state;
+	    const { email, password, isAuthorized } = this.state;
 
 		return (
 			<div className="content login-page">
@@ -31,13 +72,21 @@ class Login extends Component {
 						<div className="login-top">
 							<form-group>
 								<i className="field-ico ico-login"></i>
-								<input className="form-field" type="text" name="login" id="login" placeholder="login"/>
+								<input className="form-field" type="text" name="email" id="email" placeholder="login"
+								       value= { email }
+								       onChange={ this.handleChangeField}
+								/>
 							</form-group>
 							<form-group>
 								<i className="field-ico ico-pass"></i>
-								<input className="form-field" type="text" name="password" id="password" placeholder="password"/>
+								<input className="form-field" type="text" name="password" id="password" placeholder="password"
+								       value= { password }
+								       onChange = { this.handleChangeField }
+								/>
 							</form-group>
-							<input className="btn" type="submit" value="Войти"/>
+							<button className="btn" onClick= { this.handleSubmit }>
+								{ isAuthorized? "Регистрация": "Войти" }
+							</button>
 						</div>
 						<div className="login-bottom">
 							<p className="login-txt">
@@ -56,4 +105,8 @@ class Login extends Component {
 	}
 }
 
-export default connect(null, null)(Login);
+const mapDispatchToProps = {
+	authorize
+};
+
+export default connect(null, mapDispatchToProps)(Login);

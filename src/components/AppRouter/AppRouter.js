@@ -25,7 +25,7 @@ class AppRouter extends PureComponent {
 					       exact component={ Login }/>
 					<PrivateRoute path="/trade"
 					              component={ UserPage }/>
-					{ !isAuthorized && <Route path="/" component={ Login } />}
+					{ !isAuthorized && <Route path="/*" component={ Login } />}
 					<Redirect to="/trade" />
 				</Switch>
 			</div>

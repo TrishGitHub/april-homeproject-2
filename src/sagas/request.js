@@ -7,6 +7,7 @@ import { getNetworkErrors } from "../ducks/network";
 export default function* requestFlow(func, arg) {
 	try {
 		const response = yield call(func, arg);
+
 		if (yield select(getNetworkErrors)) yield put(clearNetworkErrors());
 		return response;
 	} catch (error) {
