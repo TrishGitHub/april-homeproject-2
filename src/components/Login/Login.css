@@ -96,4 +96,5 @@ form-group {
     margin: auto;
     width: 20px;
     height: 20px;
+    transition: background .6s;
 }

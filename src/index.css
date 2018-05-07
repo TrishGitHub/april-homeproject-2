@@ -116,7 +116,17 @@ button::-moz-focus-inner {
   background-size: contain;
 }
 
+form-group:hover .ico-login {
+  background: url("/images/user-shape-blue.svg") center no-repeat;
+  background-size: contain;
+}
+
 .ico-pass {
   background: url("/images/padlock-unlock.svg") center no-repeat;
+  background-size: contain;
+}
+
+form-group:hover .ico-pass {
+  background: url("/images/padlock-unlock-blue.svg") center no-repeat;
   background-size: contain;
 }

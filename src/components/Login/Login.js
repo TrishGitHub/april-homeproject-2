@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { authLogRequest, authRegRequest } from "../../actions/auth";
 import { getLogError, getRegError } from "../../ducks/auth";
 
-import Particles from "react-particles-js";
-import particlesParams from "./particles-params";
+import Canvas from "../Canvas/Canvas";
+// import particlesParams from "./particles-params";
 
 import './Login.css';
 
@@ -56,9 +56,9 @@ class Login extends PureComponent {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
-		const { isAuthorized, email, password } = this.state;
-		isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
+		this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
+		// const { isAuthorized, email, password } = this.state;
+		// isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
 	};
 
  	render() {
@@ -66,10 +66,7 @@ class Login extends PureComponent {
 
 		return (
 			<div className="content login-page">
-				<Particles
-					params={particlesParams}
-					style={{ position: "absolute", top: 0, left: 0, zIndex: -1,}}
-				/>
+				<Canvas/>
 				<div className="login-wrap">
 					<img src="/images/Logo.svg" className="logo" alt="J-Traiding logo"/>
 					<form className="form" >
