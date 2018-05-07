@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({
+import auth from './auth';
+import network from './network';
 
+export default combineReducers({
+	auth,
+	network,
 });

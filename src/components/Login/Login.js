@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Particles from "react-particles-js";
@@ -6,8 +6,19 @@ import particlesParams from "./particles-params";
 
 import './Login.css';
 
-class Login extends PureComponent {
-	render() {
+class Login extends Component {
+	state = {
+		isAuthorized: false,
+	};
+
+	handleSubmit =(e)=> {
+		e.preventDefault();
+		this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
+	};
+
+ 	render() {
+	    const { isAuthorized } = this.state;
+
 		return (
 			<div className="content login-page">
 				<Particles
@@ -32,7 +43,9 @@ class Login extends PureComponent {
 							<p className="login-txt">
 								Впервые на сайте?
 							</p>
-							<a href="/registration">Регистрация</a>
+							<button className="link" onClick= { this.handleSubmit }>
+								{ isAuthorized? "Войти": "Регистрация" }
+							</button>
 						</div>
 					</form>
 

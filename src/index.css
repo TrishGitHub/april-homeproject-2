@@ -33,7 +33,7 @@ body {
   align-items: center;
 }
 
-a, a:visited {
+a, a:visited, .link {
   position: relative;
   display: inline-block;
   color: #4db6e2;
@@ -41,7 +41,7 @@ a, a:visited {
   padding: 0 5px;
 }
 
-a::after {
+a::after, .link::after {
   content: '';
   position: absolute;
   left: 0;
@@ -54,11 +54,11 @@ a::after {
   transition: .6s;
 }
 
-a:hover {
+a:hover, .link:hover {
   color: #4296b9;
 }
 
-a:hover::after {
+a:hover::after, .link:hover::after {
   transform: translateY(0);
   opacity: 1;
 }
@@ -79,6 +79,7 @@ input[type="button"],
 button {
   background: none;
   border: 0;
+  outline: none;
   color: inherit;
   font: inherit;
   line-height: normal;
