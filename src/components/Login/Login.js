@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { authLogRequest, authRegRequest } from "../../actions/auth";
@@ -56,13 +56,14 @@ class Login extends PureComponent {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
-		// const { isAuthorized, email, password } = this.state;
-		// isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
+		// this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
+		const { isAuthorized, email, password } = this.state;
+		isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
 	};
 
  	render() {
 	    const { email, password, isAuthorized } = this.state;
+	    const { logError, regError } = this.props;
 
 		return (
 			<div className="content login-page">
@@ -85,6 +86,15 @@ class Login extends PureComponent {
 								       onChange = { this.handleChangeField }
 								/>
 							</form-group>
+							{ logError || regError ? (
+								<Fragment>
+									{(logError && <p className="error-message">{ logError }</p>) ||
+									(regError &&
+									Object.keys(regError).map(type => (
+										<span className="error" key={ type }>{`${ type }: ${ regError[type]}`}</span>
+									)))}
+								</Fragment>
+							) : null}
 							<button className="btn" onClick= { this.handleSubmit }>
 								{ isAuthorized? "Регистрация": "Войти" }
 							</button>

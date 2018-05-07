@@ -50,6 +50,7 @@
     padding: 1em;
     padding-left: 50px;
     box-sizing: border-box;
+    font-size: 1.125rem;
     font-family: 'Roboto', sans-serif;
     border: 1px solid #dfdfdf;
     outline: none;
@@ -97,4 +98,10 @@ form-group {
     width: 20px;
     height: 20px;
     transition: background .6s;
+}
+
+.error {
+    padding: 0 0 10px 20px;
+    color: #A6341A;
+    font-size: 1rem;
 }
