@@ -5,7 +5,6 @@ import { authLogRequest, authRegRequest } from "../../actions/auth";
 import { getLogError, getRegError } from "../../ducks/auth";
 
 import Canvas from "../Canvas/Canvas";
-// import particlesParams from "./particles-params";
 
 import './Login.css';
 
@@ -14,7 +13,7 @@ class Login extends PureComponent {
 		email: '',
 		password: '',
 		errors: { email: '', password: '' },
-		isAuthorized: false,
+		isAuthorized: true,
 		isEmailValid: false,
 		isPassValid: false,
 	};
@@ -61,6 +60,13 @@ class Login extends PureComponent {
 		isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
 	};
 
+	handleChangeForm = (e) => {
+		e.preventDefault();
+		const { isAuthorized } = this.state;
+		this.setState({ isAuthorized: !isAuthorized });
+	};
+
+
  	render() {
 	    const { email, password, isAuthorized } = this.state;
 	    const { logError, regError } = this.props;
@@ -88,7 +94,7 @@ class Login extends PureComponent {
 							</form-group>
 							{ logError || regError ? (
 								<Fragment>
-									{(logError && <p className="error-message">{ logError }</p>) ||
+									{(logError && <span className="error">{ logError }</span>) ||
 									(regError &&
 									Object.keys(regError).map(type => (
 										<span className="error" key={ type }>{`${ type }: ${ regError[type]}`}</span>
@@ -96,16 +102,25 @@ class Login extends PureComponent {
 								</Fragment>
 							) : null}
 							<button className="btn" onClick= { this.handleSubmit }>
-								{ isAuthorized? "Регистрация": "Войти" }
+								{ isAuthorized? "Войти": "Регистрация" }
 							</button>
 						</div>
 						<div className="login-bottom">
-							<p className="login-txt">
-								Впервые на сайте?
-							</p>
-							<button className="link" onClick= { this.handleSubmit }>
-								{ isAuthorized? "Войти": "Регистрация" }
-							</button>
+							{isAuthorized ? (
+								<div className="login-txt">
+									Впервые на сайте?
+									<button className="link" onClick= { this.handleChangeForm }>
+											Регистрация
+									</button>
+								</div>
+								) : (
+									<div className="login-txt">
+										Уже зарегистрированы?{" "}
+										<button className="link" onClick= { this.handleChangeForm }>
+											Войти
+										</button>
+									</div>
+							)}
 						</div>
 					</form>
 				</div>
