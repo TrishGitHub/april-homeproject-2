@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from 'components/Login';
+import AppRouter from 'components/AppRouter';
 import createStore from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,7 +12,7 @@ const store = createStore();
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={ store }>
-      <Login />
+      <AppRouter />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root'),

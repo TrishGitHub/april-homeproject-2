@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import PrivateRoute from '../PrivateRoute';
 import Login from '../Login';
-import UserPage from '../UserPage';
+import UserPage from '../UserPage/';
 
 import { getIsAuthorized } from "../../ducks/auth";
 import { getNetworkErrors, getErrorMessage } from "../../ducks/network";
 
 import './AppRouter.css';
 
-class AppRouter extends PureComponent {
+class AppRouter extends Component {
 
 	render() {
 		const { error, message, isAuthorized } = this.props;
@@ -21,8 +21,6 @@ class AppRouter extends PureComponent {
 				{error && <div className="error">{ message }</div>}
 
 				<Switch>
-					<Route path="/"
-					       exact component={ Login }/>
 					<PrivateRoute path="/trade"
 					              component={ UserPage }/>
 					{ !isAuthorized && <Route path="/*" component={ Login } />}

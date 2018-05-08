@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { authLogRequest, authRegRequest } from "../../actions/auth";
@@ -8,7 +8,7 @@ import Canvas from "../Canvas/Canvas";
 
 import './Login.css';
 
-class Login extends PureComponent {
+class Login extends Component {
 	state = {
 		email: '',
 		password: '',
@@ -119,7 +119,8 @@ class Login extends PureComponent {
 											Войти
 										</button>
 									</div>
-							)}
+								)
+							}
 						</div>
 					</form>
 				</div>
