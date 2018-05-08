@@ -55,7 +55,6 @@ class Login extends PureComponent {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// this.setState( ({ isAuthorized }) => ({ isAuthorized: !isAuthorized }));
 		const { isAuthorized, email, password } = this.state;
 		isAuthorized ? this.props.authLogRequest({ email, password }) : this.props.authRegRequest({ email, password });
 	};
