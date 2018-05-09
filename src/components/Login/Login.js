@@ -54,7 +54,7 @@ class Login extends Component {
 							</form-group>
 							<form-group>
 								<i className="field-ico ico-pass"></i>
-								<input className="form-field" type="text" name="password" id="password" placeholder="password"
+								<input className="form-field" type="password" name="password" id="password" placeholder="password"
 								       value= { password }
 								       onChange = { this.handleChangeField }
 								/>
