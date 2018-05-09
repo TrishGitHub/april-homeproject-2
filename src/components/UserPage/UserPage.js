@@ -23,9 +23,6 @@ class UserPage extends PureComponent {
 	}
 }
 
-const mapStateToProps = state => ({
-});
-
 const mapDispatchToProps = {
 	logout
 };
