@@ -12,45 +12,14 @@ class Login extends Component {
 	state = {
 		email: '',
 		password: '',
-		errors: { email: '', password: '' },
 		isAuthorized: true,
-		isEmailValid: false,
-		isPassValid: false,
 	};
 
 	handleChangeField = (e) => {
 		let name = e.target.name;
 		let value = e.target.value;
 
-		this.setState({ [name]: value }, () => {
-			this.validateField(name, value);
-		});
-	};
-
-	validateField(field, val) {
-		let errors = this.state.errors;
-		let isEmailValid = this.state.isEmailValid;
-		let isPassValid = this.state.isPassValid;
-
-		switch (field) {
-			case 'email':
-				isEmailValid = val.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-				errors.email = isEmailValid ? '' : ' is invalid';
-				break;
-
-			case 'password':
-				isPassValid = val.length >= 4;
-				errors.password = isPassValid ? '' : ' must be at least 4 characters long';
-				break;
-
-			default:
-		}
-
-		this.setState({
-			errors: errors,
-			isEmailValid: isEmailValid,
-			isPassValid: isPassValid,
-		});
+		this.setState({ [name]: value });
 	};
 
 	handleSubmit = (e) => {
@@ -64,7 +33,6 @@ class Login extends Component {
 		const { isAuthorized } = this.state;
 		this.setState({ isAuthorized: !isAuthorized, email: '', password: '' });
 	};
-
 
  	render() {
 	    const { email, password, isAuthorized } = this.state;
