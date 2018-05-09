@@ -19,7 +19,7 @@ export const logError = handleActions(
 
 export const regError = handleActions(
 	{
-		[authLogSuccess]: () => null,
+		[authRegSuccess]: () => null,
 		[authRegSuccess]: () => null,
 		[authRegFailure]: (state, action) => action.payload
 	},

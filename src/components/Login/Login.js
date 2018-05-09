@@ -62,7 +62,7 @@ class Login extends Component {
 	handleChangeForm = (e) => {
 		e.preventDefault();
 		const { isAuthorized } = this.state;
-		this.setState({ isAuthorized: !isAuthorized });
+		this.setState({ isAuthorized: !isAuthorized, email: '', password: '' });
 	};
 
 
