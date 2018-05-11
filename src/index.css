@@ -110,6 +110,17 @@ button::-moz-focus-inner {
   color: rgba(213, 213, 213, 255);
 }
 
+.container {
+  position: relative;
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+.page-inner {
+  width: 100%;
+}
+
 .ico-login {
   top: 1rem;
   background: url("/images/user-shape.svg") center no-repeat;

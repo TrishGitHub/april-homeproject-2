@@ -1,32 +1,36 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { logout } from "../../actions/auth";
+import styled from "styled-components";
+
+import Header from "../Layout/Header";
+// import Footer from "../Layout/Footer";
+import Canvas from "../Canvas/Canvas";
 
 import './UserPage.css';
 
-class UserPage extends PureComponent {
 
-	handleLogout = () => {
-		this.props.logout();
-	};
+const InnerContent = styled.section`
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    background: #fff;
+`;
+
+class UserPage extends PureComponent {
 
 	render() {
 		return (
-			<Fragment>
-				<h1>Private Page</h1>
-				<button className="btn btn-small" onClick= { this.handleLogout }>
-					Выйти
-				</button>
-			</Fragment>
+			<div className="page-inner">
+				<Canvas/>
+				<Header />
+				<InnerContent />
+				{/*<Footer />*/}
+			</div>
 		);
 	}
 }
 
-const mapDispatchToProps = {
-	logout
-};
-
 export default withRouter(
-	connect(null, mapDispatchToProps)(UserPage)
+	connect(null, null)(UserPage)
 );
