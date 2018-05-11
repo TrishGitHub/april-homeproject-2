@@ -4,6 +4,17 @@
     background: #2a2c2e;
 }
 
+.header {
+    font-size: 0.8889rem;
+}
+
+.header .logo-wrap {
+    width: 200px;
+    flex-grow: 1;
+}
+
+.logo-wrap .logo { max-width: 200px; }
+
 .header .container, .footer .container {
     justify-content: space-between;
     align-items: center;

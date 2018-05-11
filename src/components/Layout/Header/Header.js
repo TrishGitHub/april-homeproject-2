@@ -74,19 +74,21 @@ class Header extends Component {
 		return (
 			<div className="header">
 				<div className="container">
-					<img src="/images/Logo-white.svg" className="logo" alt="J-Traiding logo"/>
+					<div className="logo-wrap">
+						<img src="/images/Logo-white.svg" className="logo" alt="J-Traiding logo"/>
+					</div>
 
 					<CurrencyLink
 						className={currency === "btc" ? "active" : null}
 						to="/trade/btc" >
-						<b>{ this.state.btc }</b>
+						<span>{ this.state.btc }</span>
 						<b>1 BTC</b>
 					</CurrencyLink>
 
 					<CurrencyLink
 						className={currency === "eth" ? "active" : null}
 						to="/trade/eth" >
-						<b>{this.state.Eth}</b>
+						<span>{ this.state.Eth }</span>
 						<b>1 ETH</b>
 					</CurrencyLink>
 
