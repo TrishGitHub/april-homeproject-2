@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "../Layout/Header";
-// import Footer from "../Layout/Footer";
+import Footer from "../Layout/Footer";
 import Canvas from "../Canvas/Canvas";
 
 import './UserPage.css';
@@ -12,7 +12,8 @@ import './UserPage.css';
 
 const InnerContent = styled.section`
     width: 80%;
-    height: 100%;
+    height: auto;
+    min-height: calc(100vh - 160px);
     margin: auto;
     background: #fff;
 `;
@@ -25,7 +26,7 @@ class UserPage extends PureComponent {
 				<Canvas/>
 				<Header />
 				<InnerContent />
-				{/*<Footer />*/}
+				<Footer />
 			</div>
 		);
 	}
