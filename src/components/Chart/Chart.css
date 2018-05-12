@@ -1,3 +1,7 @@
+.chart-sec {
+    min-width: 760px;
+}
+
 .chart-top {
     display: flex;
     align-items: center;
@@ -8,5 +12,24 @@
 }
 .time-ttl {
     font-weight: 600;
+}
+
+.chart-wrap {
+    position: relative;
+    width: 720px;
+    height: 400px;
+    margin: auto;
+}
+
+.__react-svg-spinner_circle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: auto;
 }
 

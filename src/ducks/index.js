@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
-import network from './network';
 import user from './user';
 import currency from './currency';
-import cash from './currency';
+import wallet from './wallet';
+import network from './network';
 
 export default combineReducers({
 	auth,
-	network,
 	user,
 	currency,
-	cash,
+	wallet,
+	network,
 });

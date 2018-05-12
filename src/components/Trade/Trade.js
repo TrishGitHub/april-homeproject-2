@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { buyCurrencyRequest, sellCurrencyRequest} from "../../actions/currency";
-import { fetchCashRequest } from "../../actions/cash";
+import { fetchWalletRequest } from "../../actions/wallet";
 import {
 	getCurrentBtcPurchase,
 	getCurrentBtcSell,
@@ -11,15 +11,15 @@ import {
 	getSelected
 } from "../../ducks/currency";
 
-import { getCashBtc, getCashEth, getCashUsd, getCashError } from "../../ducks/cash";
+import { getWalletBtc, getWalletEth, getWalletUsd, getWalletError } from "../../ducks/wallet";
 
 import "./Trade.css"
 
 class Trade extends Component {
 	state = {
-		btc: this.props.cashBtc,
-		eth: this.props.cashEth,
-		usd: this.props.cashUsd,
+		btc: this.props.walletBtc,
+		eth: this.props.walletEth,
+		usd: this.props.walletUsd,
 		inputItem: 1,
 		currentInput: "inputItem",
 		inputSell: this.props.sell,
@@ -37,17 +37,17 @@ class Trade extends Component {
 	};
 
 	componentDidMount() {
-		this.props.fetchCashRequest();
+		this.props.fetchWalletRequest();
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { cashUsd, cashBtc, cashEth, sell, purchase } = nextProps;
+		const { walletUsd, walletBtc, walletEth, sell, purchase } = nextProps;
 		const { currentInput } = this.state;
 		this.changeInputs(currentInput, sell, purchase);
 		this.setState({
-			btc: cashBtc,
-			eth: cashEth,
-			usd: cashUsd,
+			btc: walletBtc,
+			eth: walletEth,
+			usd: walletUsd,
 		});
 	}
 	onInputChange = event => {
@@ -120,77 +120,88 @@ class Trade extends Component {
 
 	render() {
 
-		const { cashError, currencyItem } = this.props;
+		const { walletError, currencyItem } = this.props;
 		const { inputItem, inputSell, inputPurchase } = this.state;
 
 		const currencies = ["btc", "eth", "usd" ].map(item => (
-			<div key={ item }>
-				<div>
-					<span>{ Math.floor(this.state[item]) + "." }</span>
-					<span>{ this.getDecimal(this.state[item]) }</span>
-				</div>
+            <div className="wallet-item"
+                 key={ item }>
+              <div className="wallet-sum" >
+                <span className="integer-part">{ Math.floor(this.state[item]) + "." }</span>
+                <span className="decimal-part">{ this.getDecimal(this.state[item]) }</span>
+              </div>
 				{ item.toUpperCase() }
-			</div>
+            </div>
 		));
 
 		return(
-			<section className="sec trade-sec">
-				<div>
-					<h2>Ваш счет</h2>
-					{ currencies }
-				</div>
-				<h2>Покупка/продажа</h2>
-				<div>
-					<input
-						name="inputItem"
-						value={ inputItem }
-						onChange={ this.onInputChange }
-						onFocus={ this.onInputFocus }
-						onBlur={ this.onInputBlur } />
-					<span>{currencyItem.toUpperCase()}</span>
-				</div>
-				<div>
-					<div>
-						<input
-							name="inputPurchase"
-							value={inputPurchase}
-							onChange={ this.onInputChange }
-							onFocus={ this.onInputFocus }
-							onBlur={ this.onInputBlur } />
-						<span>$</span>
-					</div>
-					<button onClick={ this.handleSell }>Продать</button>
-				</div>
-				<div>
-					<div>
-						<input
-							name="inputSell"
-							value={inputSell}
-							onChange={ this.handleChange }
-							onFocus={ this.handleFocus }
-							onBlur={ this.handleBlur } />
-						<span>$</span>
-					</div>
-					<button onClick={ this.handleBuy }>Купить</button>
-				</div>
-				{cashError && <p style={{ color: "red" }}>{cashError}</p>}
-			</section>
+            <section className="sec trade-sec">
+              <div className="trade-item item-wallet">
+                <h2 className="sec-ttl">Ваш счет</h2>
+				  { currencies }
+              </div>
+
+              <div className="trade-item item-trade">
+                <h2 className="sec-ttl">Покупка/продажа</h2>
+                <form-group>
+                  <input
+                      className="input-field"
+                      name="inputItem"
+                      value={ inputItem }
+                      onChange={ this.onInputChange }
+                      onFocus={ this.onInputFocus }
+                      onBlur={ this.onInputBlur } />
+                  <span className="currency">{currencyItem.toUpperCase()}</span>
+                </form-group>
+                <div className="sell-item">
+                  <form-group>
+                    <input
+                        className="input-field"
+                        name="inputPurchase"
+                        value={inputPurchase}
+                        onChange={ this.onInputChange }
+                        onFocus={ this.onInputFocus }
+                        onBlur={ this.onInputBlur } />
+                    <span className="currency">$</span>
+                  </form-group>
+                  <button
+                      className="btn btn-red"
+                      onClick={ this.handleSell }>Продать</button>
+                </div>
+                <div className="sell-item">
+                  <form-group>
+                    <input
+                        className="input-field"
+                        name="inputSell"
+                        value={inputSell}
+                        onChange={ this.handleChange }
+                        onFocus={ this.handleFocus }
+                        onBlur={ this.handleBlur } />
+                    <span className="currency">$</span>
+                  </form-group>
+                  <button
+                      className="btn"
+                      onClick={ this.handleBuy }>Купить</button>
+                </div>
+                  { walletError && <p style={{ color: "red" }}>{ walletError }</p>}
+              </div>
+          </section>
 		)
 	};
 };
 
 const mapStateToProps = state => ({
-	cashBtc: getCashBtc(state),
-	cashEth: getCashEth(state),
-	cashUsd: getCashUsd(state),
-	cashError: getCashError(state),
+	walletBtc: getWalletBtc(state),
+	walletEth: getWalletEth(state),
+	walletUsd: getWalletUsd(state),
+	walletError: getWalletError(state),
 	sell: getSelected(state) === 'btc' ? getCurrentBtcSell(state) : getCurrentEthSell(state),
 	purchase: getSelected(state) === 'btc' ? getCurrentBtcPurchase(state) : getCurrentEthPurchase(state),
 	currencyItem: getSelected(state)
 });
 
 const mapDispatchToProps = {
-	fetchCashRequest,
+	fetchWalletRequest,
 	buyCurrencyRequest,
 	sellCurrencyRequest,
 };

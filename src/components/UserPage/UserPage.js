@@ -1,6 +1,4 @@
-import React, { PureComponent } from 'react';
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 import Header from "../Layout/Header";
@@ -21,25 +19,22 @@ const InnerContent = styled.section`
     background: #fff;
 `;
 
-class UserPage extends PureComponent {
-
-	render() {
-		return (
-			<div className="page-inner">
-				<Canvas/>
-				<Header />
-				<InnerContent>
-					<div className="col">
-						<Trade />
-						<Chart />
-					</div>
-				</InnerContent>
-				<Footer />
-			</div>
-		);
-	}
+export class UserPage extends Component {
+  render() {
+    return (
+        <div className="page-inner">
+            <Canvas/>
+            <Header />
+            <InnerContent>
+                <div className="col">
+                    <Trade />
+                    <Chart />
+                </div>
+            </InnerContent>
+            <Footer />
+        </div>
+    );
+  }
 }
 
-export default withRouter(
-	connect(null, null)(UserPage)
-);
+export default UserPage;

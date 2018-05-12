@@ -1,1 +1,1 @@
-export { default } from './Trade';
+export { default } from "./Trade.js";

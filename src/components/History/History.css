@@ -1,0 +1,20 @@
+.history table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px; }
+.history table td {
+    padding: 11px 31px;
+    border: 1px solid #f2f2f2; }
+.history table thead {
+    background-color: #eef1f1; }
+.history table thead td {
+    font-weight: 700; }
+
+.history-pagination {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 11px;
+    background-color: #f9fafb;
+    border: 1px solid #f2f2f2;
+    border-top: 0 none;
+}

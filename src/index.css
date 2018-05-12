@@ -36,9 +36,12 @@ body {
 a, a:visited, .link {
   position: relative;
   display: inline-block;
-  color: #4db6e2;
   text-decoration: none;
   padding: 0 5px;
+}
+
+.link {
+  color: #4db6e2;
 }
 
 a::after, .link::after {
@@ -54,7 +57,7 @@ a::after, .link::after {
   transition: .6s;
 }
 
-a:hover, .link:hover {
+.link:hover {
   color: #4296b9;
 }
 
@@ -125,7 +128,9 @@ button::-moz-focus-inner {
   flex-wrap: wrap;
 }
 
-.col .sec { position: relative; width: 50%; min-width: 600px; padding: 20px;}
+.col .sec { position: relative; padding: 20px; font-size: 0.8889rem;}
+.trade-sec { width: 40%; max-width: 320px; margin-right: 50px; }
+.chart-sec {width: 60%; }
 .sec-ttl {
   font-size: 1.333rem;
   color: rgba(27, 27, 27, 255);

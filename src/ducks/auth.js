@@ -1,12 +1,6 @@
 import { handleActions } from "redux-actions";
 import { combineReducers } from "redux";
-import {
-	authLogSuccess,
-	authLogFailure,
-	authRegSuccess,
-	authRegFailure,
-	logout
-} from "../actions/auth";
+import { authLogSuccess, authLogFailure,  authRegSuccess, authRegFailure, logout } from "../actions/auth";
 
 export const logError = handleActions(
 	{

@@ -11,15 +11,15 @@ export const {
 	fetchEthSuccess,
 	fetchEthFailure,
 
-	selectOffset,
-
 	buyCurrencyRequest,
 	buyCurrencySuccess,
 	buyCurrencyFailure,
 
 	sellCurrencyRequest,
 	sellCurrencySuccess,
-	sellCurrencyFailure
+	sellCurrencyFailure,
+
+	selectOffset,
 } = createActions(
 	"SELECT_BTC",
 	"SELECT_ETH",
@@ -32,13 +32,13 @@ export const {
 	"FETCH_ETH_SUCCESS",
 	"FETCH_ETH_FAILURE",
 
-	"SELECT_OFFSET",
-
 	"BUY_CURRENCY_REQUEST",
 	"BUY_CURRENCY_SUCCESS",
 	"BUY_CURRENCY_FAILURE",
 
 	"SELL_CURRENCY_REQUEST",
 	"SELL_CURRENCY_SUCCESS",
-	"SELL_CURRENCY_FAILURE"
+	"SELL_CURRENCY_FAILURE",
+
+	"SELECT_OFFSET",
 );

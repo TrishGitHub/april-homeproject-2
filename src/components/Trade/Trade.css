@@ -1,0 +1,85 @@
+.trade-item form-group {
+    position: relative;
+    display: flex;
+    width: 160px;
+    margin: 5px 0;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+}
+
+.trade-item .btn {
+    width: 94px;
+    margin: 5px 0;
+    border: 0;
+    color: #fff;
+    background: #4db6e2;
+    border-radius: 4px;
+    transition: background .6s;
+}
+
+.trade-item .btn:hover {
+    background: #4297bb;
+}
+
+.trade-item .btn-red {
+    background: #db5753;
+}
+
+.trade-item .btn-red:hover {
+    background: #af4a47;
+}
+
+.input-field {
+    background-color: transparent;
+    border: none;
+    text-align: right;
+    width: 100%;
+    height: 50px;
+    padding: 10px 50px 10px 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.currency {
+    position: absolute;
+    top: 14px;
+    bottom: 0;
+    right: 10px;
+    margin: auto;
+    width: 38px;
+    text-align: right;
+    color: #adadad;
+}
+
+.wallet-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.wallet-sum {
+    background-color: #404243;
+    border-radius: 4px;
+    padding: 10px;
+    width: 218px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    font-weight: 600;
+    color:#fff;
+}
+
+.decimal-part {
+    color: #8a8a8a;
+}
+
+.item-wallet {
+    padding-bottom: 50px;
+}
+
+.sell-item {
+    display: flex;
+    justify-content: space-between;
+}

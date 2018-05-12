@@ -4,6 +4,8 @@ import {LineChart} from 'react-easy-chart';
 import styled from "styled-components";
 import Spinner from 'react-svg-spinner';
 
+import History from '../History';
+
 import {
 	getIsBtcLoading,
 	getIsEthLoading,
@@ -65,82 +67,82 @@ class Chart extends Component {
 		} = this.props;
 
 		const tabs = Object.keys(offsets).map(item => (
-			<Tab
-				onClick={this.handleClick}
-				key={ item }
-				data-name={ item }
-				active={offset === item ? true : false} >
+            <Tab
+                onClick={this.handleClick}
+                key={ item }
+                data-name={ item }
+                active={offset === item ? true : false} >
 				{offsets[item]}
-			</Tab>
+            </Tab>
 		));
 		return(
-			<section className="sec chart-sec">
-				<h2 className="sec-ttl">Окно графика</h2>
-				<div className="chart-top">
-					<p className="time-ttl">Время:
-						<span className="time"> { currentTime }</span>
-					</p>
-					<div className="tabs-wrap">
-						{ tabs }
-					</div>
-				</div>
+            <section className="sec chart-sec">
+              <h2 className="sec-ttl">Окно графика</h2>
+              <div className="chart-top">
+                <p className="time-ttl">Время:
+                  <span className="time"> { currentTime }</span>
+                </p>
+                <div className="tabs-wrap">
+					{ tabs }
+                </div>
+              </div>
 
 				{isEthLoading || isBtcLoading ? (
-					<div className="chart-wrap">
-						<Spinner classname="loader"
-								size="50px"
-								color="#4db6e2"
-								thickness={ 2 }
-								gap={ 2 } />
-					</div>
+                    <div className="chart-wrap">
+                      <Spinner size="50px"
+                               color="#4db6e2"
+                               thickness={ 2 }
+                               gap={ 2 } />
+                    </div>
 				) : (
-					<div className="chart-wrap">
+                    <div className="chart-wrap">
 						{selected === "btc" ? (
-							<LineChart
-								lineColors={['blue', 'red']}
-								axes
-								grid
-								verticalGrid
-								interpolate={'cardinal'}
-								xType={'time'}
-								datePattern={'%d-%m %H:%M'}
-								width={600}
-								height={400}
-								style={{
+                            <LineChart
+                                lineColors={['blue', 'red']}
+                                axes
+                                grid
+                                verticalGrid
+                                interpolate={'cardinal'}
+                                xType={'time'}
+                                datePattern={'%d-%m %H:%M'}
+                                width={740}
+                                height={400}
+                                style={{
 									'.axis path': {
 										stroke: '#EDF0F1',
 									},
 								}}
-								data={[
+                                data={[
 									sellBtc.map(([date, value]) => ({x: moment(date).format('DD-MM HH:mm'), y: value})),
 									purchaseBtc.map(([date, value]) => ({x: moment(date).format('DD-MM HH:mm'), y: value})),
 								]}
-							/>
+                            />
 						) : (
-							<LineChart
-								lineColors={['blue', 'red']}
-								axes
-								grid
-								verticalGrid
-								interpolate={'cardinal'}
-								xType={'time'}
-								datePattern={'%d-%m %H:%M'}
-								width={600}
-								height={400}
-								style={{
+                            <LineChart
+                                lineColors={['blue', 'red']}
+                                axes
+                                grid
+                                verticalGrid
+                                interpolate={'cardinal'}
+                                xType={'time'}
+                                datePattern={'%d-%m %H:%M'}
+                                width={740}
+                                height={400}
+                                style={{
 									'.axis path': {
 										stroke: '#EDF0F1',
 									},
 								}}
-								data={[
+                                data={[
 									sellEth.map(([date, value]) => ({x: moment(date).format('DD-MM HH:mm'), y: value})),
 									purchaseEth.map(([date, value]) => ({x: moment(date).format('DD-MM HH:mm'), y: value})),
 								]}
-							/>
+                            />
 						)}
-					</div>
+                    </div>
 				)}
-			</section>
+				<History />
+            </section>
 		)
 	};
 }

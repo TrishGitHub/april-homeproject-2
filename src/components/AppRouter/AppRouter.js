@@ -9,24 +9,22 @@ import UserPage from '../UserPage/';
 import { getIsAuthorized } from "../../ducks/auth";
 import { getNetworkErrors, getErrorMessage } from "../../ducks/network";
 
-import './AppRouter.css';
-
 class AppRouter extends Component {
 
 	render() {
 		const { error, message, isAuthorized } = this.props;
 
 		return (
-			<div className="content">
+            <div className="content">
 				{error && <div className="error">{ message }</div>}
 
-				<Switch>
-					<PrivateRoute path="/trade"
-					              component={ UserPage }/>
+                <Switch>
+                    <PrivateRoute path="/trade"
+                                  component={ UserPage }/>
 					{ !isAuthorized && <Route path="/*" component={ Login } />}
-					<Redirect to="/trade" />
-				</Switch>
-			</div>
+                    <Redirect to="/trade" />
+                </Switch>
+            </div>
 		);
 	};
 }
