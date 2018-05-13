@@ -1,9 +1,16 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from "react-redux";
+
+import { getSelected } from "../../ducks/currency";
+import { selectOffset } from "../../actions/currency";
 
 import './History.css';
 
 export class History extends PureComponent {
 	render() {
+
+		const { selected } = this.props;
+
 		return (
 			<section className="history">
 				<h2 className="sec-ttl">История операций</h2>
@@ -13,7 +20,7 @@ export class History extends PureComponent {
 						<tr>
 							<td>Операция</td>
 							<td>Дата</td>
-							<td>BTC</td>
+							{  selected === "btc" ? ( <td>BTC</td>) : (<td>ETH</td>) }
 							<td>USD</td>
 						</tr>
 						</thead>
@@ -58,4 +65,13 @@ export class History extends PureComponent {
 	}
 };
 
-export default History;
+
+const mapStateToProps = state => ({
+	selected: getSelected(state)
+});
+
+const mapDispatchToProps = {
+	selectOffset
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(History);
