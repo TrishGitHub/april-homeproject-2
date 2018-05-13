@@ -97,14 +97,3 @@ export const sellEth = state =>
 	state.currency.eth.map(item => [new Date(item.mts), item.sell]);
 export const purchaseEth = state =>
 	state.currency.eth.map(item => [new Date(item.mts), item.purchase]);
-
-export const getMax = currency =>
-	currency.reduce(
-		(acc, { sell, purchase }) => Math.max(acc, sell, purchase),
-		0
-	);
-export const getMin = currency =>
-	currency.reduce(
-		(acc, { sell, purchase }) => Math.min(acc, sell, purchase),
-		Number.MAX_SAFE_INTEGER
-	);

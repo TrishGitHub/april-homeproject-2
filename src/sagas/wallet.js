@@ -6,11 +6,7 @@ import {
   sellCurrencySuccess,
   sellCurrencyFailure
 } from "../actions/currency";
-import {
-  fetchWalletRequest,
-  fetchWalletSuccess,
-  fetchWalletFailure
-} from "../actions/wallet";
+import { fetchWalletRequest, fetchWalletSuccess, fetchWalletFailure } from "../actions/wallet";
 import { takeLatest, put, call } from "redux-saga/effects";
 import { getWallet, buyCurrency, sellCurrency } from "../api";
 

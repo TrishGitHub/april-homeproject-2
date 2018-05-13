@@ -1,8 +1,4 @@
-import {
-  fetchUserInfoRequest,
-  fetchUserInfoSuccess,
-  fetchUserInfoFailure
-} from "../actions/user";
+import { fetchUserInfoRequest, fetchUserInfoSuccess, fetchUserInfoFailure } from "../actions/user";
 import { takeLatest, put, call } from "redux-saga/effects";
 import { getUserInfo } from "../api";
 

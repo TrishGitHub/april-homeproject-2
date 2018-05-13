@@ -1,40 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-
-import PrivateRoute from '../PrivateRoute';
-import Login from '../Login';
-import UserPage from '../UserPage/';
-
+import React, { Component } from "react";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import Login from "../Login";
+import UserPage from "../UserPage";
+import PrivateRoute from "../PrivateRoute";
+import { connect } from "react-redux";
 import { getIsAuthorized } from "../../ducks/auth";
-import { getNetworkErrors, getErrorMessage } from "../../ducks/network";
 
-class AppRouter extends Component {
-
-	render() {
-		const { error, message, isAuthorized } = this.props;
-
-		return (
-            <div className="content">
-				{error && <div className="error">{ message }</div>}
-
-                <Switch>
-                    <PrivateRoute path="/trade"
-                                  component={ UserPage }/>
-					{ !isAuthorized && <Route path="/*" component={ Login } />}
-                    <Redirect to="/trade" />
-                </Switch>
-            </div>
-		);
-	};
+export class AppRouter extends Component {
+  render() {
+    const { isAuthorized } = this.props;
+    return (
+      <Switch>
+        <PrivateRoute path="/trade/:currency" component={UserPage} />
+        {!isAuthorized && <Route path="/*" component={Login} />}
+        <Redirect to="/trade/btc" />
+      </Switch>
+    );
+  }
 }
-
 const mapStateToProps = state => ({
-	error: getNetworkErrors(state),
-	message: getErrorMessage(state),
-	isAuthorized: getIsAuthorized(state),
+  isAuthorized: getIsAuthorized(state)
 });
 
-export default withRouter(
-	connect(mapStateToProps, null)(AppRouter)
-);
+export default withRouter(connect(mapStateToProps)(AppRouter));

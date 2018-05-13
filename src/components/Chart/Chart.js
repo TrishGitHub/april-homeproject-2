@@ -141,7 +141,7 @@ class Chart extends Component {
 						)}
                     </div>
 				)}
-				<History />
+	            <History />
             </section>
 		)
 	};

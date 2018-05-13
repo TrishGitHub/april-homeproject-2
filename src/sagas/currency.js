@@ -1,12 +1,4 @@
-import {
-  takeLatest,
-  fork,
-  take,
-  select,
-  put,
-  cancel,
-  call
-} from "redux-saga/effects";
+import { takeLatest, fork, take, select, put, cancel, call } from "redux-saga/effects";
 import { delay } from "redux-saga";
 import { authLogSuccess, logout } from "../actions/auth";
 import { getOffset } from "../ducks/currency";
