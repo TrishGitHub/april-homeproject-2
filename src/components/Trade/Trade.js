@@ -20,8 +20,8 @@ class Trade extends Component {
 		btc: this.props.walletBtc,
 		eth: this.props.walletEth,
 		usd: this.props.walletUsd,
-		inputItem: 1,
-		currentInput: "inputItem",
+		inputFiat: 1,
+		currentInput: "inputFiat",
 		inputSell: this.props.sell,
 		inputPurchase: this.props.purchase,
 
@@ -65,27 +65,27 @@ class Trade extends Component {
 	};
 
 	onInputBlur = () => {
-		this.setState({ currentInput: "inputItem" });
+		this.setState({ currentInput: "inputFiat" });
 	};
 
 	handleBuy = () => {
-		const { currencyItem } = this.props;
-		const { inputItem } = this.state;
-		this.props.buyCurrencyRequest({ currencyItem, value: inputItem });
+		const { currencyName } = this.props;
+		const { inputFiat } = this.state;
+		this.props.buyCurrencyRequest({ currencyName, value: inputFiat });
 	};
 
 
 	handleSell = () => {
-		const { currencyItem } = this.props;
-		const { inputItem } = this.state;
-		this.props.sellCurrencyRequest({ currencyItem, value: inputItem });
+		const { currencyName } = this.props;
+		const { inputFiat } = this.state;
+		this.props.sellCurrencyRequest({ currencyName, value: inputFiat });
 	};
 
 	changeInputs(name, sell, purchase) {
 		switch (name) {
-			case "inputItem": {
-				this.setState(({ inputItem }) => {
-					const parsed = isNaN(inputItem) ? 0 : parseFloat(inputItem);
+			case "inputFiat": {
+				this.setState(({ inputFiat }) => {
+					const parsed = isNaN(inputFiat) ? 0 : parseFloat(inputFiat);
 					return {
 						inputSell: parsed * sell,
 						inputPurchase: parsed * purchase
@@ -98,7 +98,7 @@ class Trade extends Component {
 					const parsedSell = isNaN(inputSell) ? 0 : parseFloat(inputSell);
 					const nextItem = parsedSell / sell;
 					return {
-						inputItem: nextItem,
+						inputFiat: nextItem,
 						inputPurchase: nextItem * purchase
 					};
 				});
@@ -106,10 +106,10 @@ class Trade extends Component {
 			case "inputPurchase":
 				this.setState(({ inputPurchase }) => {
 					const parsedPurchase = isNaN(inputPurchase) ? 0 : parseFloat(inputPurchase);
-					const nextItem = parsedPurchase / purchase;
+					const nextFiat = parsedPurchase / purchase;
 					return {
-						inputItem: nextItem,
-						inputSell: nextItem * sell
+						inputFiat: nextFiat,
+						inputSell: nextFiat * sell
 					};
 				});
 				break;
@@ -120,8 +120,8 @@ class Trade extends Component {
 
 	render() {
 
-		const { walletError, currencyItem } = this.props;
-		const { inputItem, inputSell, inputPurchase } = this.state;
+		const { walletError, currencyName } = this.props;
+		const { inputFiat, inputSell, inputPurchase } = this.state;
 
 		const currencies = ["btc", "eth", "usd"].map(item => (
             <div className="wallet-item"
@@ -147,11 +147,11 @@ class Trade extends Component {
                   <input
                       className="input-field"
                       name="inputItem"
-                      value={ inputItem }
+                      value={ inputFiat }
                       onChange={ this.onInputChange }
                       onFocus={ this.onInputFocus }
                       onBlur={ this.onInputBlur } />
-                  <span className="currency">{currencyItem.toUpperCase()}</span>
+                  <span className="currency">{currencyName.toUpperCase()}</span>
                 </form-group>
                 <div className="sell-item">
                   <form-group>
@@ -197,7 +197,7 @@ const mapStateToProps = state => ({
 	walletError: getWalletError(state),
 	sell: getSelected(state) === 'btc' ? getCurrentBtcSell(state) : getCurrentEthSell(state),
 	purchase: getSelected(state) === 'btc' ? getCurrentBtcPurchase(state) : getCurrentEthPurchase(state),
-	currencyItem: getSelected(state)
+	currencyName: getSelected(state)
 });
 
 const mapDispatchToProps = {
