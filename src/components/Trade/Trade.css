@@ -72,7 +72,11 @@
 }
 
 .decimal-part {
+    max-width: 80px;
     color: #8a8a8a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-wallet {

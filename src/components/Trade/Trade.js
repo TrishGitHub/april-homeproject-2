@@ -123,7 +123,7 @@ class Trade extends Component {
 		const { walletError, currencyItem } = this.props;
 		const { inputItem, inputSell, inputPurchase } = this.state;
 
-		const currencies = ["btc", "eth", "usd" ].map(item => (
+		const currencies = ["btc", "eth", "usd"].map(item => (
             <div className="wallet-item"
                  key={ item }>
               <div className="wallet-sum" >
